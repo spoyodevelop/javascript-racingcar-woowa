@@ -21,20 +21,26 @@ async function runRounds(cars, rounds) {
 }
 
 async function executeWithTimeout(cars, rounds, timeout) {
-  return Promise.race([
-    runRounds(cars, rounds), // 라운드 실행
-    new Promise(
-      (_, reject) =>
-        setTimeout(() => {
-          shouldStop = true; // 타임아웃 발생 시 플래그 설정
-          reject(
-            new Error(
-              '너무 오랜기간동안 경기를 진행했습니다. 경기를 중단합니다.',
-            ),
-          );
-        }, timeout), // 지정된 타임아웃 시간 내에 실행되지 않으면 타임아웃
-    ),
-  ]);
+  let timer; // 타이머 ID 저장
+
+  const timeoutPromise = new Promise((_, reject) => {
+    timer = setTimeout(() => {
+      shouldStop = true; // 타임아웃 발생 시 플래그 설정
+      reject(
+        new Error(
+          '너무 오랜 기간 동안 경기를 진행했습니다. 경기를 중단합니다.',
+        ),
+      );
+    }, timeout); // 지정된 타임아웃 시간 내에 실행되지 않으면 타임아웃
+  });
+
+  // runRounds 완료 시 clearTimeout 호출
+  await Promise.race([runRounds(cars, rounds), timeoutPromise])
+    .then(() => clearTimeout(timer)) // 정상적으로 완료되면 타이머 해제
+    .catch((e) => {
+      clearTimeout(timer); // 에러 발생 시에도 타이머 해제
+      throw e;
+    });
 }
 
 class Controller {
