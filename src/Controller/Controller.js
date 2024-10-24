@@ -2,13 +2,13 @@ import Car from '../Model/Car.js';
 import { getInput, printWinners, printCarPositions } from '../View/View.js';
 import { validateCarNames, validateRounds } from './Validation.js';
 import { getWinners } from '../Util/util.js';
+import { throwError } from '../Model/Error.js';
 
 let shouldStop = false; // 타임아웃 시 중단을 위한 플래그
 
 async function runRounds(cars, rounds) {
   for (let i = 0; i < rounds; i++) {
     if (shouldStop) {
-      console.log('Operation was stopped due to timeout');
       return; // 타임아웃 발생 시 중단
     }
 
@@ -27,7 +27,11 @@ async function executeWithTimeout(cars, rounds, timeout) {
       (_, reject) =>
         setTimeout(() => {
           shouldStop = true; // 타임아웃 발생 시 플래그 설정
-          reject(new Error('Operation timed out'));
+          reject(
+            new Error(
+              '너무 오랜기간동안 경기를 진행했습니다. 경기를 중단합니다.',
+            ),
+          );
         }, timeout), // 지정된 타임아웃 시간 내에 실행되지 않으면 타임아웃
     ),
   ]);
@@ -44,7 +48,9 @@ class Controller {
       const cars = carNamesSplit.map((carName) => new Car(carName)); // Car 객체 생성
       const timeout = 5000;
 
-      await executeWithTimeout(cars, rounds, timeout);
+      await executeWithTimeout(cars, rounds, timeout).catch((e) =>
+        throwError(e.message),
+      );
 
       if (!shouldStop) {
         const maxPosition = Math.max(...cars.map((car) => car.position));
@@ -53,7 +59,7 @@ class Controller {
         printWinners(winners); // 우승자 출력
       }
     } catch (error) {
-      console.error(error.message);
+      throwError(error.message);
     }
   }
 }
