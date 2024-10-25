@@ -38,6 +38,11 @@ const exceptionTestCases = [
     expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.names.EMPTY_NAME}`,
   },
   {
+    description: '이름이 중복일 경우 예외 처리 테스트',
+    inputs: ['포비,포비'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.names.DUPLICATED_NAMES}`,
+  },
+  {
     description: '시도 횟수가 0일 때 예외 처리 테스트',
     inputs: ['pobi,woni,honux', '0'],
     expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_POSITIVE_ALLOWED}`,

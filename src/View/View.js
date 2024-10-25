@@ -1,7 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 
-export async function getInput(promptMessage) {
-  return await Console.readLineAsync(promptMessage);
+// 유의 깊게 볼것.
+export function getInput(promptMessage) {
+  return Console.readLineAsync(promptMessage);
 }
 
 export function printMessage(message) {

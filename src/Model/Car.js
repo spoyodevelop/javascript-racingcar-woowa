@@ -34,11 +34,11 @@ export default class Car {
     }
   }
 
-  getPositionString() {
+  #getPositionString() {
     return '-'.repeat(this.#position); // 위치가 0일 경우에도 빈 문자열을 반환함
   }
 
   toString() {
-    return `${this.#carName} : ${this.getPositionString()}`;
+    return `${this.#carName} : ${this.#getPositionString()}`;
   }
 }
