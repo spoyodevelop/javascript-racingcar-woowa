@@ -45,7 +45,7 @@ const exceptionTestCases = [
   {
     description: '시도 횟수가 0일 때 예외 처리 테스트',
     inputs: ['pobi,woni,honux', '0'],
-    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_POSITIVE_ALLOWED}`,
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
   },
   {
     description: '빈 이름을 입력할 경우 예외 처리 테스트',
@@ -55,7 +55,7 @@ const exceptionTestCases = [
   {
     description: '시도 횟수가 음수일 경우 예외 처리 테스트',
     inputs: ['pobi,woni,honux', '-3'],
-    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_POSITIVE_ALLOWED}`,
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
   },
   {
     description: '이름에 공백만 포함될 경우 예외 처리 테스트',
@@ -65,7 +65,7 @@ const exceptionTestCases = [
   {
     description: '시도 횟수가 숫자가 아닌 문자열일 경우 예외 처리 테스트',
     inputs: ['pobi,woni,honux', 'three'],
-    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_NUMBER_ALLOWED}`,
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
   },
   {
     description: '이름에 길이가 너무 긴 경우 예외 처리 테스트',
@@ -80,6 +80,66 @@ const exceptionTestCases = [
   {
     description: '시도 횟수가 소수일 경우 예외 처리 테스트',
     inputs: ['pobi,woni,honux', '3.5'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 공백일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', ' '],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 5a일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', '5a'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 0일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', '0'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 -1일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', '-1'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 1.5일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', '1.5'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 " 123"일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', ' 123'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 "123 "일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', '123 '],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 5a일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', '5a'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 abc일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', 'abc'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 1e2일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', '1e2'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 Infinity일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', 'Infinity'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
+  },
+  {
+    description: '시도 횟수가 NaN일 경우 예외 처리 테스트',
+    inputs: ['pobi,woni,honux', 'NaN'],
     expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,
   },
 ];

@@ -1,6 +1,6 @@
 import { ERROR_MESSAGES, throwError } from '../Model/Error.js';
 import { checkDuplicate } from '../Util/util.js';
-import { consecutiveDelimiterPattern } from '../Util/regex.js';
+import { consecutiveDelimiterPattern, isNumber } from '../Util/regex.js';
 import Car from '../Model/Car.js';
 
 function validateCarNames(carNames) {
@@ -24,18 +24,15 @@ function validateCarNames(carNames) {
 
   return carNamesSplit;
 }
-// 파싱 유의
-function validateRounds(input) {
-  const rounds = Number(input);
-  if (Number.isNaN(rounds)) {
-    throwError(ERROR_MESSAGES.rounds.ONLY_NUMBER_ALLOWED);
-  }
 
-  if (!Number.isInteger(rounds)) {
+function validateRounds(input) {
+  if (!isNumber.test(input)) {
     throwError(ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED);
   }
 
-  if (rounds <= 0) {
+  const rounds = BigInt(input);
+  // sanity check
+  if (rounds <= 0n) {
     throwError(ERROR_MESSAGES.rounds.ONLY_POSITIVE_ALLOWED);
   }
 
