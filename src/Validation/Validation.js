@@ -24,7 +24,7 @@ function validateCarNames(carNames) {
 
   return carNamesSplit;
 }
-
+// 파싱 유의
 function validateRounds(input) {
   const rounds = Number(input);
   if (Number.isNaN(rounds)) {
@@ -39,8 +39,7 @@ function validateRounds(input) {
     throwError(ERROR_MESSAGES.rounds.ONLY_POSITIVE_ALLOWED);
   }
 
-  const parsedRounds = parseInt(rounds, 10);
-  return parsedRounds;
+  return rounds;
 }
 
 function isCarLegit(car) {
@@ -49,7 +48,7 @@ function isCarLegit(car) {
   }
 }
 
-//실제로 발생할 확률은 매우 낮지만, type sanity check
+// 실제로 발생할 확률은 매우 낮지만, type sanity check
 function validateCars(cars) {
   cars.forEach((car) => {
     isCarLegit(car);
