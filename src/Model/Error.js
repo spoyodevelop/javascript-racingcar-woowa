@@ -9,6 +9,7 @@ const ERROR_MESSAGES = Object.freeze({
   },
 
   names: {
+    INVALID_INPUT: '입력이 올바르지 않습니다.',
     INVALID_NAME: '이름이 올바르지 않습니다',
     NAME_TOO_LONG: '자동차 이름은 5자를 초과할 수 없습니다.',
     DUPLICATED_NAMES: '중복된 이름은 사용할수 없습니다.',

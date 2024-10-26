@@ -43,6 +43,22 @@ const exceptionTestCases = [
     expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.names.DUPLICATED_NAMES}`,
   },
   {
+    description: '한글이름이 길이 5 초과일 경우 예외 처리 테스트',
+    inputs: ['포비라이온즈'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.names.NAME_TOO_LONG}`,
+  },
+  {
+    description: '한글이름이 길이 5 초과일 경우 예외 처리 테스트',
+    inputs: ['さくらんぼの実'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.names.NAME_TOO_LONG}`,
+  },
+
+  {
+    description: '이모지 이름이 길이 5 초과일 경우 예외 처리 테스트',
+    inputs: ['🥰🥰🥰🙂🥰🥰'],
+    expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.names.NAME_TOO_LONG}`,
+  },
+  {
     description: '시도 횟수가 0일 때 예외 처리 테스트',
     inputs: ['pobi,woni,honux', '0'],
     expectedError: `${ERROR_PREFIX}${ERROR_MESSAGES.rounds.ONLY_INTEGER_ALLOWED}`,

@@ -4,6 +4,10 @@ import { consecutiveDelimiterPattern, isNumber } from '../Util/regex.js';
 import Car from '../Model/Car.js';
 
 function validateCarNames(carNames) {
+  if (typeof carNames !== 'string') {
+    throwError(ERROR_MESSAGES.names.INVALID_INPUT);
+  }
+
   if (consecutiveDelimiterPattern.test(carNames)) {
     throwError(ERROR_MESSAGES.names.CONSECUTIVE_DELIMITERS);
   }
@@ -14,7 +18,7 @@ function validateCarNames(carNames) {
     throwError(ERROR_MESSAGES.names.EMPTY_NAME);
   }
 
-  if (carNamesSplit.some((name) => name.length > 5)) {
+  if (carNamesSplit.some((name) => Array.from(name).length > 5)) {
     throwError(ERROR_MESSAGES.names.NAME_TOO_LONG);
   }
 
