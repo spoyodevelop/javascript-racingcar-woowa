@@ -14,7 +14,7 @@ const ERROR_MESSAGES = Object.freeze({
     NAME_TOO_LONG: '자동차 이름은 5자를 초과할 수 없습니다.',
     DUPLICATED_NAMES: '중복된 이름은 사용할수 없습니다.',
     EMPTY_NAME: '공백을 이름으로 사용할수 없습니다',
-    CONSECUTIVE_DELIMITERS: '구분자를 중복되서 사용할수 없습니다.',
+    CONSECUTIVE_DELIMITERS: '구분자(,)를 중복되서 사용할수 없습니다.',
     WRONG_FORMAT: '포멧팅이 올바르지 않습니다.',
   },
 
