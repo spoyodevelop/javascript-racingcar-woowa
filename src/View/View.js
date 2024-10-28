@@ -1,7 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 
 export async function getInput(promptMessage) {
-  return await Console.readLineAsync(promptMessage);
+  return Console.readLineAsync(promptMessage);
 }
 
 export function printMessage(message) {
